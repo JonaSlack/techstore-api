@@ -3,6 +3,7 @@ package com.techstore.api.controller;
 import com.techstore.api.dto.ProductoDTO;
 import com.techstore.api.service.ProductoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,11 +30,10 @@ public class ProductoController {
         return productoService.getProductoById(id);
     }
 
-    @DeleteMapping("/productos/{id}")
-    public String deleteProducto(@PathVariable Long id) {
-        return productoService.deleteProducto(id)
-                ? "Producto eliminado correctamente"
-                : "Producto no encontrado";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        productoService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/productos/{id}")

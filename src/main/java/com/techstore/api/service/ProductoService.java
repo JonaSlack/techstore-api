@@ -43,17 +43,14 @@ public class ProductoService {
         return convertirADTO(producto);
     }
 
-    public boolean deleteProducto(Long id) {
+    public void eliminar(Long id) {
 
-        if (productoRepository.existsById(id)) {
-            Producto producto = productoRepository.findById(id).get();
-            producto.setActivo(false);
-            productoRepository.save(producto);
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-            return true;
-        }
+        producto.setActivo(false);
 
-        return false;
+        productoRepository.save(producto);
     }
 
     public ProductoDTO updateProducto(Long id, ProductoDTO productoDTO) {
