@@ -12,7 +12,7 @@ services:
       - "5432:5432"
 
   microservicio:
-    build: src/main
+    build: .
     container_name: techstore_api
     ports:
       - "8080:8080"
